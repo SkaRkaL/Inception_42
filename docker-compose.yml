@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  #mariadb
+  mariadb:
+    image: mariadb:sakarkal
+    container_name: mariadb
+    build: ./requirements/mariadb
+    volumes:
+      - mariadb:/var/lib/mysql
+    env_file :
+    - .env
+    networks :
+    - inception
+    restart: always
+#nginx
+  nginx:
+    image: nginx:sakarkal
+    container_name: nginx
+    build: ./requirements/nginx
+    ports:
+      - "443:443"
+    networks:
+      - inception
+    restart: always
+
+
+volumes:
+  mariadb:
+   driver: local
+   driver_opts:
+      type : none
+      o : bind
+      device: /home/sakarkal/data/mariadb
+networks:
+  inception:
+   name: inception

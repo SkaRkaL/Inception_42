@@ -24,14 +24,37 @@ services:
       - inception
     restart: always
 
+#wordpress
+  wordpress:
+    image: wordpress:sakarkal
+    container_name: wordpress
+    build: ./requirements/wordpress
+    depends_on:
+      - mariadb
+    volumes:
+      - wordpress:/var/www/html
+    env_file :
+      - .env
+    networks:
+      - inception
+    restart: always
+
 
 volumes:
   mariadb:
    driver: local
    driver_opts:
+      device: $HOME/data/mariadb
       type : none
       o : bind
-      device: /home/sakarkal/data/mariadb
+
+  wordpress:
+    driver: local
+    driver_opts:
+      device: $HOME/data/wordpress
+      type : none
+      o : bind
+
 networks:
   inception:
    name: inception

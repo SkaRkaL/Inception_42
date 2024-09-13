@@ -47,9 +47,9 @@ volumes:
   mariadb:
    driver: local
    driver_opts:
-      device: $HOME/data/mariadb
       type : none
       o : bind
+      device: $HOME/data/mariadb
 
   wordpress:
     driver: local

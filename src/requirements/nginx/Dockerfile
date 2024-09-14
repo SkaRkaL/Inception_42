@@ -11,12 +11,5 @@ RUN mkdir -p /etc/nginx/ssl && \
 # Copy nginx configuration file
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
-# Create WordPress directory and set permissions
-RUN mkdir -p /var/www/wordpress && \
-    chown -R www-data:www-data /var/www/wordpress
-
-# Expose port 80
-EXPOSE 80
-
 # Start nginx in the foreground
 CMD ["nginx", "-g", "daemon off;"]

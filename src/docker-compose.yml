@@ -6,7 +6,7 @@ version: '3.7'
 services:
   #mariadb
   mariadb:
-    image: mariadb:sakarkal
+    image: mariadb
     container_name: mariadb
     build: ./requirements/mariadb
     volumes:
@@ -18,24 +18,28 @@ services:
     restart: always
 #nginx
   nginx:
-    image: nginx:sakarkal
+    image: nginx
     container_name: nginx
     build: ./requirements/nginx
     ports:
       - "443:443"
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress:/var/www/wordpress
     networks:
       - inception
     restart: always
 
 #wordpress
   wordpress:
-    image: wordpress:sakarkal
+    image: wordpress
     container_name: wordpress
     build: ./requirements/wordpress
     depends_on:
       - mariadb
     volumes:
-      - wordpress:/var/www/html
+      - wordpress:/var/www/wordpress
     env_file :
       - .env
     networks:
@@ -47,9 +51,9 @@ volumes:
   mariadb:
    driver: local
    driver_opts:
+      device: $HOME/data/mariadb
       type : none
       o : bind
-      device: $HOME/data/mariadb
 
   wordpress:
     driver: local

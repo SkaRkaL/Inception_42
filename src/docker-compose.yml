@@ -6,7 +6,7 @@ version: '3.7'
 services:
   #mariadb
   mariadb:
-    image: mariadb
+    image: mariadb:skrkl
     container_name: mariadb
     build: ./requirements/mariadb
     volumes:
@@ -16,9 +16,13 @@ services:
     networks :
     - inception
     restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 1g
 #nginx
   nginx:
-    image: nginx
+    image: nginx:skrkl
     container_name: nginx
     build: ./requirements/nginx
     ports:
@@ -33,7 +37,7 @@ services:
 
 #wordpress
   wordpress:
-    image: wordpress
+    image: wordpress:skrkl
     container_name: wordpress
     build: ./requirements/wordpress
     depends_on:

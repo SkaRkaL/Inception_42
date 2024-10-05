@@ -8,7 +8,6 @@ else
 
 	cd /var/www/wordpress
 
-
 	rm -rf *
 
 	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar  
@@ -28,7 +27,7 @@ else
 	wp config set --allow-root DB_PASSWORD ${MYSQLPASSWORD}
 	wp config set --allow-root DB_HOST "mariadb:3306"
 
-	wp core install --url=$W_DN --title=$W_TITLE --admin_user=$W_A_N --admin_password=$W_A_P --admin_email=$W_E_A --allow-root 
+	wp core install --url=$W_DN --title=$W_TITLE --admin_user=$W_A_N --admin_password=$W_A_P --admin_email=$W_E_A --skip-email --allow-root 
 
 	wp user create ${N_W_USER} ${N_W_EMAIL} --user_pass=$N_W_PASS --role=$N_W_ROLE --allow-root
 

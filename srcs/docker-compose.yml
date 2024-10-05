@@ -1,12 +1,8 @@
-version: '3.7'
-
-# this command `docker system prune` will remove all the volumes and images
-
 
 services:
   #mariadb
   mariadb:
-    image: mariadb:skrkl
+    image: mariadb
     container_name: mariadb
     build: ./requirements/mariadb
     volumes:
@@ -16,10 +12,7 @@ services:
     networks :
     - inception
     restart: always
-    deploy:
-      resources:
-        limits:
-          memory: 1g
+
 #nginx
   nginx:
     image: nginx:skrkl
